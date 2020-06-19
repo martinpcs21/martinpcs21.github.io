@@ -4,4 +4,4 @@ Allow: /
 Allow: .js
 Allow: .css
 
-Sitemap: https://trituradosyrodados.com/sitemap.xml
+Sitemap: https://trituradosyrodados.com/sitemap.txt

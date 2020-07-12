@@ -12,4 +12,9 @@ $('#EnglishLanguage').click(function () {
     //console.log('English');
 });
 
+$('#FrenchLanguage').click(function () {
+    window.location.href = 'indexfr.html';
+    //console.log('English');
+});
+
 //console.log(redirected)

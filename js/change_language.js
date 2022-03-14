@@ -21,4 +21,18 @@ $('#FrenchLanguage').click(function () {
     //console.log('English');
 });
 
+$('#GranulometriaLink').click(function () {
+    window.location.href = 'granulometry.html';
+    //console.log('English');
+}); 
+
+$('#GranulometriaLinkEN').click(function () {
+    window.location.href = 'granulometryen.html';
+    //console.log('English');
+}); 
+
+$('#GranulometriaLinkFR').click(function () {
+    window.location.href = 'granulometryfr.html';
+    //console.log('English');
+}); 
 //console.log(redirected)

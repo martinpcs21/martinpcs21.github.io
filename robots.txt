@@ -1,0 +1,7 @@
+
+User-Agent: Googlebot
+Allow: /
+Allow: .js
+Allow: .css
+
+Sitemap: https://trituradosyrodados.com/sitemap.txt

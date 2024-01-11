@@ -17,8 +17,13 @@ $('#FrenchLanguage').click(function () {
     //console.log('English');
 });
 
-$('ArabicLanguage').click(function () {
+$('#ArabicLanguage').click(function () {
     window.location.href = 'indexar.html';
+    //console.log('English');
+});
+
+$('#GermanLanguage').click(function () {
+    window.location.href = 'indexge.html';
     //console.log('English');
 });
 

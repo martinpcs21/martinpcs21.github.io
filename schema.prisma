@@ -1,0 +1,203 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+model AnnualReports {
+  id     Int    @id
+  Ticker String @db.VarChar(255)
+  Year   Int
+  kpi    String @db.VarChar(255)
+  Value  Float
+
+  @@unique([Ticker, Year, kpi], map: "Ticker")
+}
+
+model Comment {
+  Ticker  String? @db.Text
+  Comment String? @db.Text
+  id      Int     @id @default(autoincrement())
+}
+
+model Companies {
+  Ticker                  String? @db.VarChar(255)
+  CompanyName             String? @db.VarChar(255)
+  StockCurrency           String? @db.VarChar(255)
+  ReportCurrency          String? @db.VarChar(255)
+  Country                 String? @db.VarChar(255)
+  Industry                String? @db.VarChar(255)
+  Sector                  String? @db.VarChar(255)
+  Beta                    Float?  @db.Float
+  BalanceSheetDate        String? @db.VarChar(255)
+  LastYearReport          String?
+  DividendYield           Float?  @db.Float
+  PercentInsidersHold     Float?  @db.Float
+  PercentInstitutionsHold Float?  @db.Float
+  SharesOutstanding       Float?
+  LongDescription         String? @db.Text
+  ForwardEPS              Float?  @db.Float
+  id                      Int     @id @default(autoincrement())
+}
+
+model Currencies {
+  Currency            String? @db.Text
+  USDConversionFactor Float?
+  id                  Int     @id @default(autoincrement())
+}
+
+model CurrentPrice {
+  Ticker String? @db.Text
+  Price  Float?
+  id     Int     @id @default(autoincrement())
+}
+
+model ExpectedGrowth {
+  Ticker         String? @db.VarChar(255)
+  ExpectedGrowth Float?
+  id             Int     @id @default(autoincrement())
+}
+
+model FundamentalAnalysis {
+  Ticker                         String? @db.Text
+  CompanyName                    String? @db.Text
+  CurrentPrice                   Float?
+  TargetPrice                    Float?
+  DCFPotential                   Float?
+  DCFWorstPotential              Float?
+  Sector                         String? @db.Text
+  Country                        String? @db.Text
+  StockCurrency                  String? @db.Text
+  ReportCurrency                 String? @db.Text
+  LastReportDate                 String? @db.Text
+  CurrentPER                     Float?
+  MeanPER                        Float?
+  CurrentEVEBITDA                Float?
+  MeanEVEBITDA                   Float?
+  CurrentEVEBIT                  Float?
+  CurrentPricetoBook             Float?
+  MeanPricetoBook                Float?
+  CurrentPricetoFreeCashFlowRate Float?
+  MeanPricetoFreeCashFlowRate    Float?
+  ROE                            Float?
+  ROIC                           Float?
+  MeanROIC                       Float?
+  ROCE                           Float?
+  ROA                            Float?
+  Beta                           Float?
+  NetDebttoPrice                 Float?
+  CashToTotalAssets              Float?
+  CashOverStockPrice             Float?
+  DebtQualityRatio               Float?
+  LiabilitiestoEquityRatio       Float?
+  NetDebttoEBITDA                Float?
+  MeanNetDebttoEBITDA            Float?
+  InterestExpensetoEBIT          Float?
+  EntrepriseValueUSD             Float?
+  EBITDATendency                 Float?
+  FreeCashFlowTendency           Float?
+  OperatingCashFlowTendency      Float?
+  NetIncomeTendency              Float?
+  EquityTendency                 Float?
+  ROICTendency                   Float?
+  DividendYield                  Float?
+  EBITDAMargin                   Float?
+  NetIncomeMargin                Float?
+  WACC                           Float?
+  PFFO                           Float?
+  MeanPFFO                       Float?
+  LastUpdate                     String? @db.Text
+  FirstYearReport                String? @db.Text
+  id                             Int     @id @default(autoincrement())
+}
+
+model HistoricalPrices {
+  id        Int     @id @default(autoincrement())
+  Ticker    String? @db.VarChar(255)
+  Year      Int?
+  MeanPrice Float?
+  MaxPrice  Float?
+  MinPrice  Float?
+
+  @@unique([Ticker, Year, MeanPrice], map: "Ticker")
+  @@unique([Ticker, Year, MaxPrice], map: "Ticker_2")
+  @@unique([Ticker, Year, MinPrice], map: "Ticker_3")
+}
+
+model Industry {
+  industry         String?  @unique(map: "industry") @db.VarChar(255)
+  sector           String?  @db.VarChar(255)
+  EVEBITDAMultiple Float?
+  cyclical         Boolean?
+  category         String?  @db.VarChar(255)
+  id               String   @id @db.VarChar(255)
+  sectorId         String?  @db.VarChar(255)
+}
+
+model IndustryAnalysisMultiples {
+  id               Int     @id @default(autoincrement())
+  Sector           String? @db.VarChar(255)
+  Industry         String? @unique(map: "Industry") @db.VarChar(255)
+  EVEBITDAMultiple Float?
+}
+
+model KPIs {
+  KPI String? @unique(map: "KPI") @db.VarChar(255)
+  id  Int     @id @default(autoincrement())
+}
+
+model OrdinarySharesAlternative {
+  Ticker      String?  @unique(map: "Ticker") @db.VarChar(255)
+  Alternative Boolean?
+  id          Int      @id @default(autoincrement())
+}
+
+model Sector {
+  sector String? @unique(map: "sector") @db.VarChar(255)
+  id     Int     @id @default(autoincrement())
+}
+
+model Sectors {
+  id       Int     @id @default(autoincrement())
+  Sector   String? @db.VarChar(255)
+  Industry String? @db.VarChar(255)
+}
+
+model SimpleAnalysis {
+  Ticker             String? @db.Text
+  CompanyName        String? @db.Text
+  Potential          Float?
+  TargetPrice        Float?
+  Currency           String? @db.Text
+  DebtQualityScore   Float?
+  EarningsScore      Float?
+  ProfitabilityScore Float?
+  GrowthScore        Float?
+  Sector             String? @db.Text
+  id                 Int     @id @default(autoincrement())
+}
+
+model Transactions {
+  id              Int     @id
+  Ticker          String? @db.VarChar(255)
+  Date            String? @db.VarChar(255)
+  TransactionType String? @db.VarChar(255)
+  Price           Float?
+  NumberOfStocks  Int?
+}
+
+model sector_ratios {
+  id        Int     @id @default(autoincrement())
+  sector_id String? @db.VarChar(255)
+  ratio     String? @db.VarChar(255)
+}
+
+model uuid {
+  uuid   String? @unique(map: "uuid") @db.VarChar(255)
+  Ticker String? @unique(map: "Ticker") @db.VarChar(255)
+  id     Int     @id @default(autoincrement())
+}

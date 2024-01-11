@@ -21,6 +21,16 @@ $('#FrenchLanguage').click(function () {
     //console.log('English');
 });
 
+$('#ArabicLanguage').click(function () {
+    window.location.href = 'indexar.html';
+    //console.log('English');
+});
+
+$('#GermanLanguage').click(function () {
+    window.location.href = 'indexde.html';
+    //console.log('English');
+});
+
 $('#GranulometriaLink').click(function () {
     window.location.href = 'granulometry.html';
     //console.log('English');

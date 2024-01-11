@@ -17,4 +17,9 @@ $('#FrenchLanguage').click(function () {
     //console.log('English');
 });
 
+$('ArabicLanguage').click(function () {
+    window.location.href = 'indexar.html';
+    //console.log('English');
+});
+
 //console.log(redirected)
